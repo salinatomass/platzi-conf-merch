@@ -19,3 +19,7 @@
   text-decoration: none;
   color: #33b1ff;
 }
+.Header svg {
+  width: 20px;
+  height: 20px;
+}

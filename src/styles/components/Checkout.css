@@ -20,6 +20,12 @@
   background-color: transparent;
   border: none;
   outline: none;
+  cursor: pointer;
+  color: #3c484e;
+}
+.Checkout-item svg {
+  width: 20px;
+  height: 20px;
 }
 .Checkout-element {
   display: flex;
