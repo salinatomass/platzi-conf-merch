@@ -3,6 +3,7 @@ import appActions from './appActions';
 export const initialState = {
   cart: [],
   buyer: {},
+  orders: [],
   products: [],
 };
 
@@ -28,10 +29,14 @@ export const appReducer = (state, action) => {
       };
 
     case appActions.ADD_TO_BUYER:
-      console.log('reducer: ', payload);
       return {
         ...state,
         buyer: payload,
+      };
+    case appActions.ADD_NEW_ORDER:
+      return {
+        ...state,
+        orders: [...state.orders, payload],
       };
 
     default:

@@ -5,6 +5,7 @@ const appActions = {
   REMOVE_FROM_CART: 'REMOVE_FROM_CART',
 
   ADD_TO_BUYER: 'ADD_TO_BUYER',
+  ADD_NEW_ORDER: 'ADD_NEW_ORDER',
 };
 
 export default appActions;

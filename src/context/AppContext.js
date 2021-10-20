@@ -31,13 +31,17 @@ export const AppProvider = ({ children }) => {
     dispatch({ type: appActions.ADD_TO_BUYER, payload: buyer });
   };
 
+  const addNewOrder = (order) => {
+    dispatch({ type: appActions.ADD_NEW_ORDER, payload: order });
+  };
+
   useEffect(() => {
     loadProducts();
   }, [products]);
 
   return (
     <AppContext.Provider
-      value={{ ...state, addToCart, removeFromCart, addToBuyer }}
+      value={{ ...state, addToCart, removeFromCart, addToBuyer, addNewOrder }}
     >
       {children}
     </AppContext.Provider>
