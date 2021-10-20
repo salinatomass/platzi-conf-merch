@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { createContext, useContext } from 'react';
-import useInitialState from '../hooks/useInitialState';
+import { appReducer, initialState } from './appReducer';
+import appActions from './appActions';
+import useGetProducts from '../hooks/useGetProducts';
 
-const AppContext = createContext({});
+const AppContext = createContext(initialState);
 
 export const useAppContext = () => {
   const context = useContext(AppContext);
@@ -10,9 +12,28 @@ export const useAppContext = () => {
 };
 
 export const AppProvider = ({ children }) => {
-  const initialState = useInitialState();
+  const [state, dispatch] = useReducer(appReducer, initialState);
+  const products = useGetProducts();
+
+  const loadProducts = () => {
+    dispatch({ type: appActions.LOAD_PRODUCTS, payload: products });
+  };
+
+  const addToCart = (product) => {
+    dispatch({ type: appActions.ADD_TO_CART, payload: product });
+  };
+
+  const removeFromCart = (product) => {
+    dispatch({ type: appActions.REMOVE_FROM_CART, payload: product });
+  };
+
+  useEffect(() => {
+    loadProducts();
+  }, [products]);
 
   return (
-    <AppContext.Provider value={initialState}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ ...state, addToCart, removeFromCart }}>
+      {children}
+    </AppContext.Provider>
   );
 };
