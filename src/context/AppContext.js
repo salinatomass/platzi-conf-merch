@@ -27,12 +27,18 @@ export const AppProvider = ({ children }) => {
     dispatch({ type: appActions.REMOVE_FROM_CART, payload: product });
   };
 
+  const addToBuyer = (buyer) => {
+    dispatch({ type: appActions.ADD_TO_BUYER, payload: buyer });
+  };
+
   useEffect(() => {
     loadProducts();
   }, [products]);
 
   return (
-    <AppContext.Provider value={{ ...state, addToCart, removeFromCart }}>
+    <AppContext.Provider
+      value={{ ...state, addToCart, removeFromCart, addToBuyer }}
+    >
       {children}
     </AppContext.Provider>
   );
