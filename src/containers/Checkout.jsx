@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { AiOutlineDelete } from 'react-icons/ai';
 import '../styles/components/Checkout.css';
@@ -21,30 +22,35 @@ const Checkout = () => {
   };
 
   return (
-    <div className="Checkout">
-      <div className="Checkout-content">
-        <h3>{cartHasItems ? 'Lista de pedidos:' : 'Sin pedidos'}</h3>
-        {cart.map((item) => (
-          <div className="Checkout-item" key={item.id}>
-            <div className="Checkout-element">
-              <h4>{item.title}</h4>
-              <span>${item.price}</span>
+    <>
+      <Helmet>
+        <title>Lista de pedidos - Platzi Conf Merch</title>
+      </Helmet>
+      <div className="Checkout">
+        <div className="Checkout-content">
+          <h3>{cartHasItems ? 'Lista de pedidos:' : 'Sin pedidos'}</h3>
+          {cart.map((item) => (
+            <div className="Checkout-item" key={item.id}>
+              <div className="Checkout-element">
+                <h4>{item.title}</h4>
+                <span>${item.price}</span>
+              </div>
+              <button type="button" onClick={() => handleRemove(item)}>
+                <AiOutlineDelete />
+              </button>
             </div>
-            <button type="button" onClick={() => handleRemove(item)}>
-              <AiOutlineDelete />
-            </button>
-          </div>
-        ))}
-      </div>
-      {cartHasItems && (
-        <div className="Checkout-sidebar">
-          <h3>{`Precio Total: ${handleSumTotal()}`}</h3>
-          <Link to="/checkout/information">
-            <button type="button">Continuar pedido</button>
-          </Link>
+          ))}
         </div>
-      )}
-    </div>
+        {cartHasItems && (
+          <div className="Checkout-sidebar">
+            <h3>{`Precio Total: ${handleSumTotal()}`}</h3>
+            <Link to="/checkout/information">
+              <button type="button">Continuar pedido</button>
+            </Link>
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

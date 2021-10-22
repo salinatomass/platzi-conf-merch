@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { useHistory } from 'react-router-dom';
 import { PayPalButton } from 'react-paypal-button-v2';
 import { useAppContext } from '../context/AppContext';
@@ -42,29 +43,34 @@ const Payment = () => {
   };
 
   return (
-    <div className="Payment">
-      <div className="Payment-content">
-        <h3>Resumen del pedido:</h3>
-        {cart.map((item) => (
-          <div className="Payment-item" key={item.id}>
-            <div className="Payment-element">
-              <h4>{item.title}</h4>
-              <span>$ {item.price}</span>
+    <>
+      <Helmet>
+        <title>Confirma tu pago - Platzi Conf Merch</title>
+      </Helmet>
+      <div className="Payment">
+        <div className="Payment-content">
+          <h3>Resumen del pedido:</h3>
+          {cart.map((item) => (
+            <div className="Payment-item" key={item.id}>
+              <div className="Payment-element">
+                <h4>{item.title}</h4>
+                <span>$ {item.price}</span>
+              </div>
             </div>
+          ))}
+          <div className="Payment-button">
+            <PayPalButton
+              options={paypalOptions}
+              style={buttonStyles}
+              amount={handleSumTotal()}
+              onSuccess={(data) => handlePaymentSuccess(data)}
+              onCancel={(data) => console.log(data)}
+              onError={(err) => console.log(err)}
+            />
           </div>
-        ))}
-        <div className="Payment-button">
-          <PayPalButton
-            options={paypalOptions}
-            style={buttonStyles}
-            amount={handleSumTotal()}
-            onSuccess={(data) => handlePaymentSuccess(data)}
-            onCancel={(data) => console.log(data)}
-            onError={(err) => console.log(err)}
-          />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

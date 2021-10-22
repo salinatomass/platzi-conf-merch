@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { useAppContext } from '../context/AppContext';
 import '../styles/components/Success.css';
 
@@ -13,15 +14,20 @@ const Success = () => {
   });
 
   return (
-    <div className="Success">
-      <div className="Success-content">
-        <h2>{buyer.name}, Gracias por tu compra</h2>
-        <span>Tu pedido llegará en 3 dias a tu dirección</span>
-        <div className="Success-map">
-          <Map data={location} />
+    <>
+      <Helmet>
+        <title>Gracias por tu compra - Platzi Conf Merch</title>
+      </Helmet>
+      <div className="Success">
+        <div className="Success-content">
+          <h2>{buyer.name}, Gracias por tu compra</h2>
+          <span>Tu pedido llegará en 3 dias a tu dirección</span>
+          <div className="Success-map">
+            <Map data={location} />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
